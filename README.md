@@ -7,7 +7,7 @@ MCP-compatible LLM client (Claude Desktop, Claude Code, Cursor, …) safely read
 send commands to ESP32 / Arduino hardware — **without** the LLM, the MCP host, or the device being
 trusted blindly.
 
-Pronounced **TETH-er** — /ˈtɛð.ər/ (soft "th", like *feather*).
+Pronounced **TETH-er** — /ˈtɛð.ər/ (soft "th", like *feather* lol).
 
 ---
 
