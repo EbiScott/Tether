@@ -1,0 +1,50 @@
+# Tether example policy — annotated.
+# Deny-by-default: a device or tool not listed here cannot be called by the LLM.
+# Copy to policy.yaml and edit for your own hardware. Secrets go in env vars, never in this file.
+
+version: 1
+
+defaults:
+  # Global ceiling applied to every tool call across all devices.
+  rate_limit:
+    calls: 30
+    per_seconds: 60
+  confirmation:
+    mode: queue           # queue (human approves) | deny (block all high-risk) | auto (DEV ONLY)
+    expiry_seconds: 300    # a pending high-risk action auto-denies after this long
+
+# Anomaly detector thresholds (feature #3). See docs/SPEC.md section 7.
+anomaly:
+  repetition:
+    max_identical: 5       # same tool+args this many times...
+    per_seconds: 30        # ...within this window -> blocked (runaway loop)
+  denial_burst:
+    max_denials: 8         # this many denials...
+    per_seconds: 60        # ...within this window (looks like probing)...
+    cooldown_seconds: 120  # ...quarantines the device/tool for this long
+  escalation:
+    max_high_risk_attempts: 3
+    per_seconds: 60
+
+devices:
+  # ---- The bench ESP32 that the mock simulator (python -m tether.sim.mock_esp32) emulates ----
+  lab-esp32-01:
+    description: "Lab ESP32 on the bench"
+    transport:
+      kind: http
+      address: "http://127.0.0.1:8080"
+      auth:
+        type: bearer
+        token_env: TETHER_LAB_ESP01_TOKEN   # export this; the real secret is never stored here
+    tools:
+      read_sensor:
+        tier: read_only
+        sensors: [temperature, humidity, soil_moisture]
+      set_actuator:
+        tier: high_risk        # flipping a physical relay needs a human -> confirmation queue
+        actuators: [relay1, led]
+        rate_limit:            # per-tool override, tighter than the global default
+          calls: 5
+          per_seconds: 60
+      send_raw_command:
+        allow: false           # raw passthrough explicitly disabled on this device
