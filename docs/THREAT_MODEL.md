@@ -98,8 +98,9 @@ Not necessarily malicious — a buggy agent in a tight loop can hammer a device 
   MITM-able; TLS + MQTT-over-TLS + per-message HMAC are roadmap, not v1.
 - **Operator confirmation channel** is assumed to be trusted (local CLI / console). Securing *that*
   (who can approve) is a later concern.
-- **Audit log is append-only by convention** (JSONL + fsync); tamper-*evidence* (hash chaining) is a
-  roadmap item noted in the spec.
+- **Audit log is append-only and tamper-evident** — records form a SHA-256 hash chain
+  (`verifyChain()`), seeded from the file across restarts, so any edit, reorder, or drop is
+  detectable. Shipping the log to secure off-box storage remains a deployment concern.
 - **Physical safety interlocks** (e.g. a relay that must never exceed N seconds) are the device's
   job; Tether reduces but cannot eliminate the risk of a bad actuation.
 

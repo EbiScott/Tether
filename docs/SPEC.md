@@ -163,27 +163,33 @@ block of device/tool for `cooldown_seconds`). All transitions are audited.
 
 ## 8. Audit record (#5)
 
-Append-only JSONL (one object per line, fsync'd). One record per call attempt:
+Append-only JSONL (one object per line). One record per call attempt:
 
 ```json
 {
+  "seq": 42,
+  "prevHash": "9f2c… (sha-256 of the previous record)",
+  "hash": "4b7e… (sha-256 of this record, incl. seq + prevHash)",
   "ts": "2026-10-15T12:34:56.789Z",
-  "request_id": "a1b2c3d4",
-  "actor": { "host": "claude-desktop", "session": "..." },
-  "device_id": "lab-esp32-01",
+  "requestId": "a1b2c3d4",
+  "actor": { "host": "mcp" },
+  "deviceId": "lab-esp32-01",
   "tool": "set_actuator",
   "args": { "actuator": "relay1", "state": "on" },
   "tier": "high_risk",
   "decision": "pending",
   "reason": "high_risk_requires_confirmation",
-  "anomaly_flags": [],
-  "result_status": "pending",
-  "latency_ms": 3,
+  "anomalyFlags": [],
+  "resultStatus": "pending",
+  "latencyMs": 3,
   "error": null
 }
 ```
 
-`args` are post-sanitization and secret-redacted. Roadmap: per-line hash chaining for tamper-evidence.
+`args` are post-sanitization and secret-redacted. **Tamper-evidence:** records form a SHA-256 hash
+chain — each `hash` covers the record including its `seq` and `prevHash`, so editing, reordering, or
+dropping any record breaks the chain from that point on. `verifyChain()` detects it and reports the
+first bad `seq`; the chain is seeded from the file on restart so it spans process lifetimes.
 
 ## 9. Device authentication
 

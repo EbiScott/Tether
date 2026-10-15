@@ -46,7 +46,7 @@ keeping the microcontroller's own attack surface tiny.
 | 2 | **Risk tiers** | `read_only` (auto), `low_risk` (auto + log), `high_risk` (human confirmation). |
 | 3 | **Anomaly detector** | Flags abnormal call rate, repetition, denial-probing, tier-escalation. |
 | 4 | **Data sanitizer** | Validates + neutralizes device→LLM data to block indirect prompt injection. |
-| 5 | **Audit log** | Append-only, queryable JSONL record of every call — a forensic trail. |
+| 5 | **Audit log** | Append-only, **hash-chained** (tamper-evident), queryable JSONL record of every call — a forensic trail. |
 | 6 | **Threat model** | A published doc that states what Tether defends against and why. See [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md). |
 
 ## Documents
