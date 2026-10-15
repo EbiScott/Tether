@@ -1,0 +1,32 @@
+# Node / TypeScript
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Tether runtime artifacts
+*.audit.jsonl
+audit*.jsonl
+pending_actions.json
+config/policy.yaml          # local policy may hold real device addresses; only the example is tracked
+.env
+.env.*
+!.env.example
+
+# Conversation transcript — handoff notes, not part of the product / not shipped
+*Conversation Transcript*.md
+*.transcript.md
+
+# Legacy Python scaffold (pre-TypeScript) — remove once deleted
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Tooling / IDE / OS
+.vitest/
+coverage/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,50 @@
+{
+  "name": "tether-mcp",
+  "version": "0.1.0",
+  "description": "A security-first MCP bridge between LLMs and internet-connected microcontrollers (ESP32/Arduino).",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "tether": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist",
+    "config/policy.example.yaml",
+    "README.md",
+    "docs"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "serve": "tsx src/index.ts serve --config config/policy.example.yaml",
+    "sim": "tsx src/sim/mockEsp32.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "iot",
+    "esp32",
+    "arduino",
+    "security",
+    "llm"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "js-yaml": "^4.1.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^20.14.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4",
+    "vitest": "^2.1.0"
+  }
+}
