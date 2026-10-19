@@ -27,7 +27,7 @@ anomaly:
     per_seconds: 60
 
 devices:
-  # ---- The bench ESP32 that the mock simulator (python -m tether.sim.mock_esp32) emulates ----
+  # ---- The bench ESP32 that the mock simulator (npm run sim) emulates ----
   lab-esp32-01:
     description: "Lab ESP32 on the bench"
     transport:
