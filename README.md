@@ -51,6 +51,8 @@ keeping the microcontroller's own attack surface tiny.
 
 ## Documents
 
+- [`HOW_TO_USE.md`](HOW_TO_USE.md) — **start here.** Install, run, test, the confirmation flow,
+  real hardware, writing policy, troubleshooting.
 - [`docs/THREAT_MODEL.md`](docs/THREAT_MODEL.md) — assets, trust boundaries, attacker types, attack
   scenarios, and the control that stops each one.
 - [`docs/SPEC.md`](docs/SPEC.md) — the MCP tools, the call lifecycle, the policy schema, risk-tier
