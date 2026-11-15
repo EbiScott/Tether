@@ -1,6 +1,21 @@
-# Tether
 
-**A security-first MCP bridge between LLMs and internet-connected microcontrollers.**
+<div align="center">
+
+  <img src="assets/tether-logo.png" alt="Tether Logo" width="600"/>
+
+  ### A security-first MCP bridge between LLMs and internet-connected microcontrollers.
+
+  [![MCP](https://img.shields.io/badge/MCP-Compatible-blueviolet)](https://modelcontextprotocol.io)
+  ![TypeScript](https://img.shields.io/badge/TypeScript-5.5+-3178C6?logo=typescript&logoColor=white)
+  ![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white)
+  ![Hardware](https://img.shields.io/badge/Hardware-ESP32%20%7C%20Arduino-orange)
+  ![License](https://img.shields.io/badge/License-MIT-green)
+  ![Tests](https://img.shields.io/badge/Tests-Vitest-6E9F18?logo=vitest&logoColor=white)
+
+  **Authenticate → Validate → Govern → Sanitize → Audit**
+
+</div>
+
 
 Tether is a [Model Context Protocol](https://modelcontextprotocol.io) server that lets any
 MCP-compatible LLM client (Claude Desktop, Claude Code, Cursor, …) safely read sensors from and
